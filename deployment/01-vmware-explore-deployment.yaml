@@ -17,8 +17,6 @@ spec:
     spec:
       containers:
         - name: demo-app-ui
-          image: ghcr.io/beyondelastic/vmware-explore-app:v7
+          image: projects.registry.vmware.com/tanzu_ese_poc/osb2534eur:v1
           ports:
           - containerPort: 80
-
-
