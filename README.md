@@ -1,55 +1,40 @@
 # VMware Explore Demo App
 
-This is the repository used for the Demo App in the VMware Explore 2022 talk: Get Started with Containers and Kubernetes using vSphere with Tanzu
+This is the repository used for the Demo App in the VMware Explore 2022 session `#OSB2534EUR - VMware Event Broker Appliance - Unlocking the Hidden Potential of Event-Driven Automation for VMware Partners`
 
-The talk consists of two parts:
+Link to the recording will be available HERE soon.
 
-* Building the Container
-* Running the container in a Kubernetes environment
+## Customization
 
-## The App
+It's pretty simple to adjust the content which will be displayed on the page. Simply replace the images used in folder `images` with your own and make the appropriate adjustments on text, links and images in the `index.html` file.
 
-This is a very simple static HTML side showing the VMware Explore content and some additional links with more information around the topics. The site is based on [HTML5 UP](https://html5up.net/). If you would like to learn more about containers follow these links:
+## Build and run the App
 
-* [Containers 101](https://kube.academy/courses/containers-101)
-* [Building Applications for Kubernetes](https://kube.academy/courses/building-applications-for-kubernetes)
-* [Building Images](https://kube.academy/courses/building-images)
+After you finished your adjustments, build the container image and give a first test run locally:
 
-### Build the App
-
-We use the docker daemon to build the container and run it afterwards.
-
-```bash
-docker build . -t your-docker-hub-account/vmware-explore:1.0
+```shell
+docker build . -t your-docker-hub-account/webapp:v1 && docker run -it --rm -p 8080:80 --name webapp your-docker-hub-account/webpage:v1
 ```
 
-### Use the App
-
-We run the container localy and exposite to the local port ```5000```:
-
-```bash
-docker run -d -p 5000:80 --rm --name vmware-explore your-docker-hub-account/vmware-explore:1.0
-```
+You'll reach the website on `127.0.0.1:8080`
 
 ## Deployment
 
-We're using a simple deployment file to start the application in our Kubernetes cluster. For more advanced techniques like helm or carvel please have a look at the following content:
+I'm using a simple deployment file to start the application in a Kubernetes cluster. For more advanced techniques like helm or carvel please have a look at the following content:
 
 * [Helm 101](https://kube.academy/courses/helm-101)
 * [Carvel on the Tanzu Developer Portal](https://tanzu.vmware.com/developer/guides/kubernetes/carvel/)
 
-We have two files to match the steps in the Demo. First we create the deployment and afterwards we create the Load Balancer. If you want to use your own image, please update the deployment file to reference your image. The default setting is to pull the image from github.
+Deploy the application with a Kubernetes Service Type `LoadBalancer`:
 
-```bash
-kubectl apply -f deployment/01-vmware-explore-deployment.yaml
-kubectl apply -f deployment/02-vmware-explore-service.yaml
+```shell
+kubectl apply -f .
 ```
 
 ## Credit
 
-Here are the sources for the HTML and images used in the app: 
+Credits are going out to [Alexander Ullah](https://github.com/beyondelastic) who raised my attention for the webapp during his VMware Explore session [#KUBB1941USD](https://www.vmware.com/explore/video-library/video-landing.html?sessionid=1652910378821001NMRa&videoId=6311393838112).
+
+Here are the sources for the HTML and images used in the app:
 
 * [HTML5 UP](https://html5up.net/)
-* Photo by [Cameron Venti](https://unsplash.com/@ventiviews?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/container?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-* Photo by [ThisisEngineering RAEng](https://unsplash.com/@thisisengineering?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/code-female?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-* Photo by [AbsolutVision](https://unsplash.com/@freegraphictoday?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/post-it?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
