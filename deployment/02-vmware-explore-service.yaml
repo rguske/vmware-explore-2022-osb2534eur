@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vmware-explore-app
+  labels:
+    app: demo-app-ui
+    tier: frontend
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: demo-app-ui
+    tier: frontend
+
+

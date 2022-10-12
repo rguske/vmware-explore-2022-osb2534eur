@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vmware-explore-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-app-ui
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: demo-app-ui
+        tier: frontend
+    spec:
+      containers:
+        - name: demo-app-ui
+          image: ghcr.io/beyondelastic/vmware-explore-app:v7
+          ports:
+          - containerPort: 80
+
+
